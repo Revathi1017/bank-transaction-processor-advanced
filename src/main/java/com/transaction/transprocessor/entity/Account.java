@@ -11,33 +11,39 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Account")
+@Table(name = "accounts")
 public class Account {
 
     @Setter
     @Id
+    @Column(name="account_id")
     private UUID accountID;
 
     @Setter
-    @Column(nullable = false, unique = true)
+    @Column(name="accountNumber", nullable = false, unique = true)
     private String accountNumber;
 
     @Setter
-    @Column(nullable = false, precision = 19, scale = 2) //99999999999999999.99
+    @Column(name="balance", nullable = false, precision = 19, scale = 2) //99999999999999999.99
     private BigDecimal balance;
 
     @Setter
+    @Column(name="account_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
     @Setter
+    @Column(name="status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @Setter
     @CreationTimestamp
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
     @Version
+    @Column(name="version")
     private Long version;
 
     public Long getVersion() {

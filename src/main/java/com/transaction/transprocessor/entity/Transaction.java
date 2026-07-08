@@ -1,30 +1,39 @@
 package com.transaction.transprocessor.entity;
 
 import com.transaction.transprocessor.domain.type.TransactionType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "transactions")
 public class Transaction {
 
     @Id
+    @Column(name = "transaction_id")
     private UUID transactionId;
 
+    @Column(name = "account_id",
+            nullable = false)
     private UUID accountId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private TransactionType type;
 
+    @Column(name = "amount",
+            nullable = false,
+            precision = 19, scale = 4)
     private BigDecimal amount;
 
+    @Column(name = "balance_after_transaction",
+            nullable = false,
+            precision = 19, scale = 4)
     private BigDecimal balanceAfterTransaction;
 
+    @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
     public UUID getTransactionId() {
